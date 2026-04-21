@@ -68,7 +68,17 @@ async function main() {
 
             case 'get_all_orders':
                 res.status = 200;
-                res.data = await db.Order.find();
+                res.data = [];
+                locals.orders = await db.Order.find();
+                for (const order of locals.orders) {
+                    res.data.push({
+                        _id: order._id,
+                        user: await db.User.findById(order.user_id).select('-password'),
+                        order: await db.Product.findById(order.product_id),
+                        status: order.status,
+                        date: order.date
+                    });
+                }
                 break;
 
 

@@ -26,7 +26,7 @@ const Product = mongoose.model('Product', productSchema);
 const orderSchema = new mongoose.Schema({
     user_id: String,
     product_id: String,
-    status: { type: String, enum: ['pending', 'paid', 'cancelled'], default: 'pending' },
+    status: { type: String, enum: ['pending', 'paid', 'cancelled', 'shipped'], default: 'pending' },
     date: { type: Date, default: Date.now }
 });
 const Order = mongoose.model('Order', orderSchema);
